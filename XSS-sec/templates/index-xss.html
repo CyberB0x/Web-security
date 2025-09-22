@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Блог XSS</title>
+</head>
+<body>
+    <h1>Мини Блог</h1>
+    <form method="post">
+        <input type="text" name="comment" placeholder="Введите комментарий">
+        <button type="submit">Отправить</button>
+    </form>
+
+    <h2>Комментарии:</h2>
+    <ul>
+        {% for c in comments %}
+           <li>{{ c }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
