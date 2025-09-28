@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Изменение пароля (Уязвимый пример)</title>
+</head>
+<body>
+  <h1>Изменить пароль</h1>
+  <form method="post">
+    <input type="text" name="password" placeholder="Введите новый пароль">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+    <button type="submit">Изменить</button>
+  </form>
+
+  <p>Текущий пароль: <strong>{{ user.password }}</strong></p>
+</body>
+</html>
