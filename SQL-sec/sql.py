@@ -3,7 +3,7 @@ from flask import Flask, request, render_template, redirect, url_for
 
 app = Flask(__name__)
 
-# создаем базу данных и таблицу пользователей
+
 def init_db():
     conn = sqlite3.connect("users.db")
     c = conn.cursor()
@@ -12,7 +12,7 @@ def init_db():
                     username TEXT,
                     password TEXT
                 )""")
-    # добавляем тестового пользователя
+
     c.execute("INSERT INTO users (username, password) VALUES (?, ?)", ("admin", "12345"))
     conn.commit()
     conn.close()
@@ -26,11 +26,13 @@ def login():
         username = request.form.get("username")
         password = request.form.get("password")
 
-        # ❌ УЯЗВИМЫЙ SQL ЗАПРОС (строка форматирования!)
-        query = f"SELECT * FROM users WHERE username='{username}' AND password='{password}'"
+        # ❌ УЯЗВИМЫЙ SQL ЗАПРОС (строка форматирования! запрос admin' OR '1'='1)
+        # SELECT * FROM users WHERE username='admin' OR '1'='1' AND password='...'
+        # query = f"SELECT * FROM users WHERE username='{username}' AND password='{password}'"
+        query = "SELECT * FROM users WHERE username=? AND password=?"
         conn = sqlite3.connect("users.db")
         c = conn.cursor()
-        c.execute(query)
+        c.execute(query, (username, password))
         user = c.fetchone()
         conn.close()
 
