@@ -1,6 +1,7 @@
 import os
 from flask import Flask, request, render_template
-from defusedxml.ElementTree import parse # безопасный парсер
+from defusedxml.ElementTree import parse  # безопасный парсер
+# from lxml import etree  # Уязвимый парсер (позволяет XXE)
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -20,6 +21,12 @@ def index():
             path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             file.save(path)
             try:
+                """ Уязвимый парсер: разрешаем загрузку DTD и внешние сущности
+                parser = etree.XMLParser(load_dtd=True, no_network=False, resolve_entities=True)
+                tree = etree.parse(path, parser)
+                root = tree.getroot()
+                data = [(child.tag, child.text) for child in root]
+                """
                 # Безопасный парсер defusedxml
                 tree = parse(path)
                 root = tree.getroot()
