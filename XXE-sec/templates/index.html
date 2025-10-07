@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>XXE Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      text-align: center;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    input[type="file"] {
+      margin-right: 10px;
+    }
+    ul {
+      text-align: left;
+    }
+    .error { color: red; }
+  </style>
+</head>
+<body>
+  <h1>Загрузка XML-файла</h1>
+
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".xml" required>
+    <button type="submit">Загрузить</button>
+  </form>
+
+  {% if error %}
+    <p class="error">Ошибка: {{ error }}</p>
+  {% endif %}
+
+  {% if data %}
+    <h2>Результат:</h2>
+    <ul>
+      {% for tag, text in data %}
+        <li><strong>{{ tag }}</strong>: {{ text }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</body>
+</html>
