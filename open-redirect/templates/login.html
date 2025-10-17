@@ -3,6 +3,16 @@
 <head><meta charset="utf-8"><title>Login (Insecure)</title></head>
 <body>
   <h1>Login (Insecure)</h1>
+
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+     <ul style="color: red">
+       {% for msg in messages %} <li>{{ msg }}</li>{% endfor %}
+     </ul>
+    {% endif %}
+  {% endwith %}
+
   <form method="post">
     <input type="hidden" name="next" value="{{ next_url }}">
     <label>Username: <input name="username"></label><br>
