@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Profile</title></head>
+<body>
+  <h1>Welcome, {{ user }}</h1>
+
+  <h2>Leave a comment</h2>
+  <form method="post">
+    <input type="text" name="comment" placeholder="Comment">
+    <button>Post</button>
+  </form>
+
+  <h2>Comments</h2>
+  <ul>
+    {% for c in comments %}
+      <!-- Исправленный страница профиля -->
+      <li>{{ c }}</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>
